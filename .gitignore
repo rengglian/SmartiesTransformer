@@ -1,0 +1,9 @@
+*.png
+*.JPG
+*.jpg
+.vscode
+cmake_install.cmake
+CMakeFiles
+CMakeCache.txt
+Makefile
+SmartiesTransformer
