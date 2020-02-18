@@ -9,9 +9,11 @@ Image::Image(std::shared_ptr<Config> config) : config_(config) {
         throw " Error opening image";
     }
 	//substract background image from source image and blur it sligthly
-    filteredImg = img-backgroundImg;
+    //filteredImg = img-backgroundImg;
+    cv::absdiff(backgroundImg, img, filteredImg);
     cv::cvtColor(filteredImg, filteredImg, cv::COLOR_BGR2GRAY);
-    cv::medianBlur(filteredImg, filteredImg, Image::BLURFILTERSIZE);
+    //cv::medianBlur(filteredImg, filteredImg, 5);
+    cv::medianBlur(filteredImg, filteredImg, 3);
     findSpots();    
 }
 
@@ -21,7 +23,8 @@ void Image::findSpots() {
     std::vector<cv::Vec3f> circles;
     cv::HoughCircles(filteredImg, circles, cv::HOUGH_GRADIENT, 1,
                  filteredImg.rows/32,  // change this value to detect circles with different distances to each other
-                 70, 10, 3, 10 // change the last two parameters
+                 70, 10, 3, 15 // change the last two parameters
+                 //70, 10, 3, 10 // change the last two parameters
             // (min_radius & max_radius) to detect larger circles
     );  
 

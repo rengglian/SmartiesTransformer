@@ -46,12 +46,8 @@ int main( int argc, char** argv )
 	result.at<double>(1, 2) = center_orig.y-new_center.y;
 
 	cv::Mat src_transformed;
-    cv::warpAffine(src, src_transformed, result, src.size());
-	cv::Mat bgImage = image_->GetBackgroundImage();
-	cv::Mat resultImg = cv::Mat::zeros(bgImage.size(), bgImage.type());
-	cv::cvtColor ( src_transformed, src_transformed, cv::COLOR_GRAY2BGR );
-	cv::addWeighted(bgImage , 0.7, src_transformed, 0.3, 0, resultImg);
-
+    cv::warpAffine(image_->GetImage(), src_transformed, result, image_->GetImage().size());
+	
 	cv::imshow("source", (image_->GetImage()));
 	cv::imshow("filtered circles", (image_->GetFilteredImage()));
 	cv::imshow("X Spots", draw_->all(image_->GetImage(), analyzer_->GetXAxisSpots()));
@@ -60,10 +56,10 @@ int main( int argc, char** argv )
 	cv::imshow("Sorted", draw_->all(image_->GetImage(), sorted_spots));
 	cv::imshow("Target", draw_->all(image_->GetImage(), targetSpots));
 
-	cv::imshow("Result", resultImg);
+	cv::imshow("Result", src_transformed);
 
-	cv::imwrite("result.jpg", (image_->GetFilteredImage()));
-	//cv::imshow("Result", src_transformed+image_->GetImage());
+	cv::imwrite("result.jpg", src_transformed);
+
 	cv::waitKey();
 
     return 0;

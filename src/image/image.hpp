@@ -18,8 +18,6 @@ class Image {
 
 	private:
 		void findSpots();
-
-		const int BLURFILTERSIZE = 5;
 		
 		const std::shared_ptr<Config> config_;                    
 
