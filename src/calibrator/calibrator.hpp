@@ -15,9 +15,6 @@ class Calibrator {
 
 	private:
 		std::vector<cv::Point2d> createTargetSpots();
-		std::vector<cv::Point2d> createTargetSpots2();
-		std::vector<cv::Point2d> createTargetSpots3();
-		std::vector<cv::Point2d> createTargetSpots4();
 		const std::shared_ptr<Config> config_;
 		double px_to_mm{50};
 		std::vector<cv::Point2d> targetSpots;

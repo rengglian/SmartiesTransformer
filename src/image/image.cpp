@@ -8,7 +8,6 @@ Image::Image(std::shared_ptr<Config> config) : config_(config) {
     if(backgroundImg.empty() || img.empty()){
         throw " Error opening image";
     }
-
 	//substract background image from source image and blur it sligthly
     filteredImg = img-backgroundImg;
     cv::cvtColor(filteredImg, filteredImg, cv::COLOR_BGR2GRAY);

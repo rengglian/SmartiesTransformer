@@ -56,6 +56,7 @@ int main( int argc, char** argv )
 	cv::imshow("filtered circles", (image_->GetFilteredImage()));
 	cv::imshow("X Spots", draw_->all(image_->GetImage(), analyzer_->GetXAxisSpots()));
 	cv::imshow("Y Spots", draw_->all(image_->GetImage(), analyzer_->GetYAxisSpots()));
+	cv::imshow("Corners Spots", draw_->all(image_->GetImage(), analyzer_->GetCornerSpots()));
 	cv::imshow("Sorted", draw_->all(image_->GetImage(), sorted_spots));
 	cv::imshow("Target", draw_->all(image_->GetImage(), targetSpots));
 

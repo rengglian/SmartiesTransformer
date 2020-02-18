@@ -20,10 +20,10 @@ std::vector<cv::Point2d> Analyzer::Sort(const std::vector<cv::Point2d>& unsorted
 
     for (const auto& spot : unsorted)
     {
-		if (spot.x > x1.x && spot.y > x1.y) x1 = spot;
-		if (spot.x < x2.x && spot.y < x2.y)	x2 = spot;
-		if (spot.x > y2.x && spot.y < y2.y)	y2 = spot;
-		if (spot.x < y1.x && spot.y > y1.y)	y1 = spot;									
+      if (spot.x < x1.x && avg_spot.x > spot.x)	x1 = spot;
+      if (spot.x > x2.x && avg_spot.x < spot.x) x2 = spot;
+      if (spot.y < y1.y && avg_spot.y > spot.y)	y1 = spot;
+      if (spot.y > y2.y && avg_spot.y < spot.y)	y2 = spot;							
     }
 
     cornerSpots.clear();
@@ -32,8 +32,8 @@ std::vector<cv::Point2d> Analyzer::Sort(const std::vector<cv::Point2d>& unsorted
     cornerSpots.push_back(y1);
     cornerSpots.push_back(y2);
 
-	const double slopeX = calculateSlope(x1, x2);
-	const double slopeY = calculateSlope(y1, y2);
+	const double slopeX = calculateSlope(x2, x1);
+	const double slopeY = calculateSlope(y2, y1);
 
 	const double offsetX = calculateOffset(x1, slopeX);
 	const double offsetY = calculateOffset(y1, slopeY);
